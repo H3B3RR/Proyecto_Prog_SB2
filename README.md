@@ -100,9 +100,7 @@ El código parece correcto en términos lógicos.
 * El modelo de Hugging Face utilizado para el análisis lógico es bastante efectivo para detectar errores semánticos comunes, pero no garantiza que todos los errores lógicos sean identificados, especialmente en casos complejos.
 * La API puede tener limitaciones dependiendo del tráfico o de las restricciones de uso en Hugging Face.
 
-## Contribuciones
 
-Si deseas contribuir a este proyecto, por favor, haz un fork, crea una rama y envía un pull request. Asegúrate de seguir las mejores prácticas de codificación y pruebas.
 
 ## Licencia
 
@@ -122,5 +120,4 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más 
 6. **Contribuciones**: Cómo contribuir al proyecto.
 7. **Licencia**: Tipo de licencia del proyecto (MIT en este caso).
 
-Este README debería ser suficiente para que otros entiendan y puedan usar tu proyecto correctamente. ¿Te gustaría hacer alguna modificación o agregar más detalles?
 ```
