@@ -1,6 +1,4 @@
-Aquí tienes un ejemplo de un archivo `README.md` para tu proyecto en GitHub:
 
-````markdown
 # Proyecto de Análisis de Código en Python
 
 Este proyecto proporciona una herramienta para analizar código Python y detectar errores de sintaxis y problemas lógicos utilizando la API de Hugging Face y el modelo de análisis semántico `Salesforce/codet5-base`.
