@@ -106,18 +106,102 @@ El código parece correcto en términos lógicos.
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
 
+
+## API y Funcionamiento Interno
+
+El análisis de código se realiza utilizando una API basada en Hugging Face y Gradio. A continuación, se describe cómo funciona:
+
+### Implementación de la API
+
+La API está diseñada para analizar código Python y proporcionar dos tipos de análisis: sintáctico y semántico. A continuación, se detalla el funcionamiento:
+
+```python
+import gradio as gr
+import ast
+from transformers import pipeline
+import pyflakes.api
+from pyflakes.reporter import Reporter
+import io
+
+# Cargar modelo de Hugging Face para análisis semántico
+analyzer = pipeline("text2text-generation", model="Salesforce/codet5-base")
+
+# Función que analiza el código
+def analizar_codigo(codigo):
+    errores = ""
+    explicacion = ""
+
+    # Verificación de sintaxis con pyflakes
+    reporter_output = io.StringIO()
+    reporter = Reporter(reporter_output, reporter_output)
+    try:
+        # Analizar código con pyflakes
+        pyflakes.api.check(codigo, filename="<input>", reporter=reporter)
+        errores_sintaxis = reporter_output.getvalue()
+
+        if errores_sintaxis:
+            errores = f"❌ Errores de sintaxis detectados:\n{errores_sintaxis}"
+            explicacion = "Revisa los errores de sintaxis indicados y corrígelos antes de continuar."
+            return errores, explicacion
+        else:
+            errores = "✅ Sintaxis válida"
+    except Exception as e:
+        errores = f"❌ Error al analizar la sintaxis: {str(e)}"
+        explicacion = "Hubo un problema al analizar la sintaxis del código. Asegúrate de que el código sea correcto."
+
+    # Análisis semántico con modelo
+    prompt = f"Analiza el siguiente código en Python y explica si hay errores lógicos o semánticos:\n\n{codigo}"
+    try:
+        resultado = analyzer(prompt, max_length=256, do_sample=False)[0]['generated_text']
+        return errores, resultado
+    except Exception as e:
+        return errores, f"❌ Error al analizar semánticamente el código: {str(e)}"
+
+# ⬇️ Interfaz Gradio
+demo = gr.Interface(
+    fn=analizar_codigo,
+    inputs=gr.Textbox(lines=15, label="Pega tu función aquí"),
+    outputs=[
+        gr.Textbox(label="Estado de la sintaxis"),
+        gr.Textbox(label="Análisis semántico (lógico)")
+    ],
+    title="🔍 Analizador de errores en funciones de programación",
+    description="Este Space detecta errores de sintaxis y semánticos (lógicos) en funciones en Python."
+)
+
+demo.launch()
 ```
 
-### ¿Qué incluye este README?
+### Dependencias
 
-1. **Descripción general**: Qué hace el proyecto y las funcionalidades clave.
-2. **Requisitos**: Librerías y versiones de Python necesarias para ejecutar el proyecto.
-3. **Instrucciones de uso**:
-   - Cómo clonar el repositorio.
-   - Cómo preparar y ejecutar el script.
-4. **Ejemplo de uso**: Un flujo básico para mostrar cómo interactuar con el proyecto.
-5. **Notas**: Limitaciones y detalles adicionales sobre el análisis y uso del modelo.
-6. **Contribuciones**: Cómo contribuir al proyecto.
-7. **Licencia**: Tipo de licencia del proyecto (MIT en este caso).
+Para que la API funcione correctamente, asegúrate de instalar las siguientes dependencias:
+
+```bash
+pip install gradio transformers torch pyflakes
+```
+
+### Descripción del Proceso
+
+1. **Análisis de Sintaxis**:
+   - Se utiliza la librería `pyflakes` para verificar errores de sintaxis en el código proporcionado.
+   - Si se detectan errores, se devuelven al usuario con una explicación.
+
+2. **Análisis Semántico**:
+   - Se utiliza el modelo `Salesforce/codet5-base` de Hugging Face para analizar el código y detectar posibles errores lógicos o semánticos.
+   - El modelo genera una explicación detallada basada en el código proporcionado.
+
+3. **Interfaz Gradio**:
+   - La API incluye una interfaz gráfica creada con `gradio`, donde los usuarios pueden pegar su código Python y recibir el análisis en tiempo real.
+
+### Requisitos Adicionales
+
+Asegúrate de incluir las siguientes librerías en el archivo `requirements.txt`:
 
 ```
+gradio
+transformers
+torch
+pyflakes
+```
+
+Con esta implementación, puedes analizar código Python de manera eficiente y obtener información detallada sobre posibles errores de sintaxis y lógica. 
