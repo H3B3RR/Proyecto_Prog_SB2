@@ -1,0 +1,7 @@
+🧪 Sintaxis:
+❌ Errores de sintaxis detectados:
+<input>:2:5: undefined name 'QMessageBox'
+
+
+📘 Análisis lógico:
+Revisa los errores de sintaxis indicados y corrígelos antes de continuar.

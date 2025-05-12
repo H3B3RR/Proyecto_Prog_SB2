@@ -1,119 +1,128 @@
-# Proyecto_Prog_SB2
-Este proyecto es un analizador de código Python que verifica errores de sintaxis y semántica (lógica) en funciones de programación.
+Aquí tienes un ejemplo de un archivo `README.md` para tu proyecto en GitHub:
 
+````markdown
+# Proyecto de Análisis de Código en Python
 
-# Documentación del Proyecto: Analizador Sintáctico y Semántico
-## Autor del Proyecto
-
-Este proyecto fue desarrollado por [Heber Nolasco](https://github.com/tu-usuario-de-github). Si tienes preguntas o sugerencias, no dudes en abrir un issue o contactarme a través de mi perfil de GitHub.
-
-## Descripción del Proyecto
-Este proyecto es un analizador de código Python que verifica errores de sintaxis y semántica (lógica) en funciones de programación. Utiliza herramientas como:
-
-- **Pyflakes**: Para verificar errores de sintaxis.
-- **Hugging Face Transformers**: Para realizar análisis semántico utilizando el modelo `Salesforce/codet5-base`.
-- **Gradio**: Para crear una interfaz gráfica interactiva que permite a los usuarios pegar su código y obtener resultados en tiempo real.
+Este proyecto proporciona una herramienta para analizar código Python y detectar errores de sintaxis y problemas lógicos utilizando la API de Hugging Face y el modelo de análisis semántico `Salesforce/codet5-base`.
 
 ## Características
 
-### Análisis de Sintaxis
-- Detecta errores de sintaxis en el código utilizando `pyflakes`.
-- Proporciona mensajes claros sobre los errores encontrados.
+- **Análisis de Sintaxis**: Detecta errores de sintaxis en el código Python proporcionado.
+- **Análisis Lógico/semántico**: Utiliza un modelo de Hugging Face para analizar problemas lógicos o semánticos en el código.
+- **Interfaz de Línea de Comandos**: El código se lee desde un archivo de texto, se envía a la API y el resultado se guarda en otro archivo de texto.
+- **Fácil de Usar**: Simplemente ingresa tu código en un archivo de texto y ejecuta el script desde la terminal.
 
-### Análisis Semántico
-- Utiliza un modelo de lenguaje (`codet5-base`) para analizar el código y detectar posibles errores lógicos o semánticos.
-- Ofrece explicaciones detalladas sobre los problemas encontrados.
+## Requisitos
 
-### Interfaz Gráfica
-- Implementada con `Gradio`, permite a los usuarios interactuar fácilmente con el analizador.
-- Los resultados se presentan en dos secciones:
-    - **Estado de la Sintaxis**: Indica si la sintaxis es válida o si hay errores.
-    - **Análisis Semántico**: Explica posibles errores lógicos en el código.
-
-## Requisitos del Proyecto
-Para ejecutar este proyecto, asegúrate de tener instaladas las siguientes dependencias:
-
-- Archivo `requirements.txt`.
-
-## Instalación de Dependencias
-Ejecuta el siguiente comando para instalar las dependencias:
+- **Python 3.6 o superior**.
+- **Librerías necesarias**:
+  - `gradio_client`
+  - `requests`
+  
+Puedes instalar las dependencias necesarias ejecutando:
 
 ```bash
-pip install -r requirements.txt
+pip install gradio_client requests
+````
+
+## Archivos
+
+* **`entrada.txt`**: Este archivo debe contener el código Python que deseas analizar.
+* **`salida.txt`**: Este archivo contiene el resultado del análisis de sintaxis y el análisis lógico del código proporcionado. Se genera automáticamente.
+
+## ¿Cómo ejecutar el script?
+
+1. **Clona el repositorio**:
+
+   Si aún no tienes el proyecto, puedes clonarlo desde GitHub:
+
+   ```bash
+   git clone https://github.com/tu_usuario/tu_repositorio.git
+   cd tu_repositorio
+   ```
+
+2. **Prepara el archivo de entrada**:
+
+   Crea un archivo llamado `entrada.txt` en el directorio del proyecto. Este archivo debe contener el código Python que deseas analizar. Ejemplo de contenido:
+
+   ```python
+   def on_btn_historial_clicked(self):
+       QMessageBox.information(self, "Historial", "Botón Historial clickeado")
+   ```
+
+3. **Ejecuta el script**:
+
+   En la terminal, navega al directorio donde se encuentra el archivo `call_api.py` y ejecuta el siguiente comando:
+
+   ```bash
+   python call_api.py
+   ```
+
+4. **Revisa los resultados**:
+
+   El script generará un archivo `salida.txt` en el mismo directorio, que contiene el análisis de sintaxis y análisis lógico del código que proporcionaste.
+
+   El archivo `salida.txt` tendrá el siguiente formato:
+
+   ```
+   🧪 Sintaxis:
+   ✅ Sintaxis válida
+
+   📘 Análisis lógico:
+   Este código parece estar bien en términos lógicos, aunque el comportamiento puede depender de los detalles del entorno de la GUI.
+   ```
+
+## Ejemplo de uso
+
+### 1. Crea un archivo `entrada.txt` con el siguiente contenido:
+
+```python
+def ejemplo_funcion():
+    print("Hola mundo")
 ```
 
-## Cómo Ejecutar el Proyecto
-1. Asegúrate de que todas las dependencias estén instaladas.
-2. Ejecuta el archivo `app.py` con el siguiente comando:
+### 2. Ejecuta el script con:
 
 ```bash
-python app.py
+python call_api.py
 ```
 
-Esto abrirá una interfaz gráfica en tu navegador donde podrás pegar tu código Python para analizarlo.
-
-## Ejemplos de Código para Probar
-
-### 1. Código Correcto
-Este código no tiene errores de sintaxis ni semánticos.
-
-```python
-def suma(a, b):
-    return a + b
-
-resultado = suma(5, 3)
-print(resultado)
-```
-
-**Resultado Esperado**:
-- **Estado de la Sintaxis**: ✅ Sintaxis válida.
-- **Análisis Semántico**: No se detectan errores lógicos.
-
-### 2. Código con Error Semántico
-Este código tiene un error lógico: intenta dividir por cero, lo cual generará un error en tiempo de ejecución.
-
-```python
-def division(a, b):
-    return a / b
-
-resultado = division(5, 0)
-print(resultado)
-```
-
-**Resultado Esperado**:
-- **Estado de la Sintaxis**: ✅ Sintaxis válida.
-- **Análisis Semántico**: ❌ Error lógico detectado: división por cero.
-
-### 3. Código con Error Sintáctico
-Este código tiene un error de sintaxis: falta un paréntesis de cierre en la definición de la función.
-
-```python
-def saludo(nombre:
-    print(f"Hola, {nombre}")
-```
-
-**Resultado Esperado**:
-- **Estado de la Sintaxis**: ❌ Error de sintaxis detectado: falta un paréntesis de cierre.
-- **Análisis Semántico**: No se realiza debido a errores de sintaxis.
-
-## Cómo Probar los Ejemplos
-1. Copia cada ejemplo de código y pégalo en el cuadro de texto de la interfaz gráfica de `Gradio`.
-2. Observa los resultados en las secciones:
-    - **Estado de la Sintaxis**: Indica si la sintaxis es válida o si hay errores.
-    - **Análisis Semántico**: Explica posibles errores lógicos en el código.
-
-## Estructura del Proyecto
-El proyecto está organizado de la siguiente manera:
+### 3. El resultado en `salida.txt` será algo similar a:
 
 ```
-integrador/
-├── app.py
-├── requirements.txt
-├── README.md
-└── modelos/
-    └── codet5-base/
+🧪 Sintaxis:
+✅ Sintaxis válida
+
+📘 Análisis lógico:
+El código parece correcto en términos lógicos.
 ```
 
-## Notas Adicionales
-- Si encuentras problemas al ejecutar el proyecto, asegúrate de que las dependencias estén correctamente instaladas.
-- El modelo `Salesforce/codet5-base` requiere conexión a Internet para descargarse la primera vez que se utiliza.
+## Notas
+
+* El modelo de Hugging Face utilizado para el análisis lógico es bastante efectivo para detectar errores semánticos comunes, pero no garantiza que todos los errores lógicos sean identificados, especialmente en casos complejos.
+* La API puede tener limitaciones dependiendo del tráfico o de las restricciones de uso en Hugging Face.
+
+## Contribuciones
+
+Si deseas contribuir a este proyecto, por favor, haz un fork, crea una rama y envía un pull request. Asegúrate de seguir las mejores prácticas de codificación y pruebas.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+```
+
+### ¿Qué incluye este README?
+
+1. **Descripción general**: Qué hace el proyecto y las funcionalidades clave.
+2. **Requisitos**: Librerías y versiones de Python necesarias para ejecutar el proyecto.
+3. **Instrucciones de uso**:
+   - Cómo clonar el repositorio.
+   - Cómo preparar y ejecutar el script.
+4. **Ejemplo de uso**: Un flujo básico para mostrar cómo interactuar con el proyecto.
+5. **Notas**: Limitaciones y detalles adicionales sobre el análisis y uso del modelo.
+6. **Contribuciones**: Cómo contribuir al proyecto.
+7. **Licencia**: Tipo de licencia del proyecto (MIT en este caso).
+
+Este README debería ser suficiente para que otros entiendan y puedan usar tu proyecto correctamente. ¿Te gustaría hacer alguna modificación o agregar más detalles?
+```
