@@ -35,40 +35,55 @@ pip install gradio_client requests
    Si aún no tienes el proyecto, puedes clonarlo desde GitHub:
 
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   git clone https://github.com/H3B3RR/Proyecto_Prog_SB2.git
    cd tu_repositorio
    ```
 
 2. **Prepara el archivo de entrada**:
 
-   Crea un archivo llamado `entrada.txt` en el directorio del proyecto. Este archivo debe contener el código Python que deseas analizar. Ejemplo de contenido:
+Crea un archivo llamado `entrada.txt` en el directorio del proyecto. Este archivo debe contener el código Python que deseas analizar. A continuación, se presentan tres ejemplos:
 
-   ```python
-   def on_btn_historial_clicked(self):
-       QMessageBox.information(self, "Historial", "Botón Historial clickeado")
-   ```
+### Ejemplo 1: Código Correcto
+```python
+def saludar(nombre):
+    print(f"Hola, {nombre}!")
+```
+
+### Ejemplo 2: Código con Error Semántico
+```python
+def dividir(a, b):
+    return a / b  # No se maneja la división por cero
+```
+
+### Ejemplo 3: Código con Error de Sintaxis
+```python
+def sumar(a, b)
+    return a + b
+```
 
 3. **Ejecuta el script**:
 
-   En la terminal, navega al directorio donde se encuentra el archivo `call_api.py` y ejecuta el siguiente comando:
+    En la terminal, navega al directorio donde se encuentra el archivo `call_api.py` y ejecuta el siguiente comando:
 
-   ```bash
-   python call_api.py
-   ```
+    ```bash
+    python call_api.py
+    ```
 
 4. **Revisa los resultados**:
 
-   El script generará un archivo `salida.txt` en el mismo directorio, que contiene el análisis de sintaxis y análisis lógico del código que proporcionaste.
+    El script generará un archivo `salida.txt` en el mismo directorio, que contiene el análisis de sintaxis y análisis lógico del código que proporcionaste.
 
-   El archivo `salida.txt` tendrá el siguiente formato:
+    **Nota**: El análisis puede tardar entre 3 y 10 minutos debido a que la infraestructura utilizada es limitada, ya que se trata de la versión gratuita.
 
-   ```
-   🧪 Sintaxis:
-   ✅ Sintaxis válida
+    El archivo `salida.txt` tendrá el siguiente formato:
 
-   📘 Análisis lógico:
-   Este código parece estar bien en términos lógicos, aunque el comportamiento puede depender de los detalles del entorno de la GUI.
-   ```
+    ```
+    🧪 Sintaxis:
+    ✅ Sintaxis válida
+
+    📘 Análisis lógico:
+    Este código parece estar bien en términos lógicos, aunque el comportamiento puede depender de los detalles del entorno de la GUI.
+    ```
 
 ## Ejemplo de uso
 
